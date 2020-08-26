@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Button, Form, Input } from "antd";
 import TextArea from "antd/lib/input/TextArea";
+import FileUpload from "../../utils/FileUpload";
 
 const { Title } = Typography;
 const { textarea } = Input;
@@ -42,10 +43,11 @@ function UploadProductPage() {
   return (
     <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <Title level={1}> Travel Product Upload</Title>
+        <Title level={1}> Clothes Product Upload</Title>
       </div>
       <Form>
-        {/* upload*/}
+        {/* clothing upload*/}
+        <FileUpload />
         <br />
         <br />
         <label>Product Name</label>
