@@ -16,6 +16,7 @@
   "author": "hyoje lee",
   "license": "ISC",
   "dependencies": {
+    "antd": "^4.6.1",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",

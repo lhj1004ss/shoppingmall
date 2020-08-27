@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Typography, Button, Form, Input } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import FileUpload from "../../utils/FileUpload";
+import Axios from "axios";
 
 const { Title } = Typography;
 const { textarea } = Input;
 
-const Kinds = [
+const kinds = [
   { key: 1, value: "Casual" },
   { key: 2, value: "Sports" },
   { key: 3, value: "Suit" },
@@ -16,7 +17,7 @@ const Kinds = [
   { key: 7, value: "Underwear" },
 ];
 
-function UploadProductPage() {
+function UploadProductPage(props) {
   const [Name, setName] = useState("");
   const [Description, setDescription] = useState(0);
   const [Price, setPrice] = useState(0);
@@ -40,14 +41,45 @@ function UploadProductPage() {
     setKind(e.currentTarget.value);
   };
 
+  const updateImages = (newImages) => {
+    setImages(newImages);
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (!Name || !Description || !Price || !Kind || !Images) {
+      return alert("please fill out all options");
+    }
+
+    const variables = {
+      //current login user ID
+      writer: props.user.userData._id,
+      title: Name,
+      descrption: Description,
+      price: Price,
+      images: Images,
+      kinds: Kind,
+    };
+
+    Axios.post("/api/product", variables).then((response) => {
+      if (response.data.success) {
+        alert("succeeded to upload clothing");
+        // go to main homepage
+        props.history.push("/");
+      } else {
+        alert("failed to upload clothing");
+      }
+    });
+  };
+
   return (
     <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
         <Title level={1}> Clothes Product Upload</Title>
       </div>
-      <Form>
+      <Form onSubmit={onSubmit}>
         {/* clothing upload*/}
-        <FileUpload />
+        <FileUpload refreshFunction={updateImages} />
         <br />
         <br />
         <label>Product Name</label>
@@ -66,7 +98,7 @@ function UploadProductPage() {
         <br />
         <br />
         <select onChange={kindChangeHandler} value={Kind}>
-          {Kinds.map((item) => (
+          {kinds.map((item) => (
             <option key={item.key} value={item.key}>
               {item.value}
             </option>
@@ -74,7 +106,11 @@ function UploadProductPage() {
         </select>
         <br />
         <br />
-        <Button>Submit</Button>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Button type="submit" onClick={onSubmit}>
+            Upload
+          </Button>
+        </div>
       </Form>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import { Icon } from "antd";
 import axios from "axios";
-// import "./FileUpload.css";
+import "./FileUpload.css";
 
 function FileUpload(props) {
   const [Images, setImages] = useState([]);
@@ -77,7 +77,14 @@ function FileUpload(props) {
             key={index}
           >
             <img
-              style={{ minWidth: "300px", width: "300px", height: "250px" }}
+              className="hello"
+              style={{
+                minWidth: "300px",
+                width: "300px",
+                height: "250px",
+                border: "2px solid black",
+                borderRadius: "2rem",
+              }}
               src={`http://localhost:5000/${image}`}
             />
           </div>
