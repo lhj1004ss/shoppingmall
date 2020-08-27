@@ -4,7 +4,10 @@ import { Carousel, Icon, Col, Card, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../utils/ImageSlider";
 import CheckBox from "./Section/CheckBox";
-import { kinds } from "./Section/Datas";
+import { kinds, price } from "./Section/Datas";
+import RadioBox from "./Section/RadioBox";
+import SearchFeature from "./Section/SearchFeature";
+import { set } from "mongoose";
 
 function LandingPage() {
   const [Products, setProducts] = useState([]);
@@ -12,6 +15,7 @@ function LandingPage() {
   const [Limit, setLimit] = useState(8);
   const [PostSize, setPostSize] = useState(0);
   const [Filters, setFilters] = useState({ kinds: [], price: [] });
+  const [SearchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     let variables = { skip: Skip, limit: Limit };
@@ -76,12 +80,43 @@ function LandingPage() {
     getProducts(variables);
     setSkip(0);
   };
+  const handlePrice = (value) => {
+    const data = price;
+    let array = [];
+    // key first, second index ...to last index
+    for (let key in data) {
+      // value is 1,2,3...to last number in filters
+      if (data[key]._id === parseInt(value, 10)) {
+        array = data[key].array;
+      }
+    }
+    return array;
+  };
 
   const handleFilters = (filters, category) => {
     const newFilters = { ...Filters };
     newFilters[category] = filters;
+    // console.log(filters);
 
+    if (category === "price") {
+      let priceValue = handlePrice(filters);
+      newFilters[category] = priceValue;
+    }
     showFilterResults(newFilters);
+    setFilters(newFilters);
+  };
+  const updateSearchTerm = (newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+
+    let variables = {
+      skip: 0,
+      limit: Limit,
+      filters: Filters,
+      searchTerm: newSearchTerm,
+    };
+    setSkip(0);
+    setSearchTerm(newSearchTerm);
+    getProducts(variables);
   };
 
   return (
@@ -89,17 +124,27 @@ function LandingPage() {
       <div style={{ textAlign: "center" }}>
         <h1>Back to School Deal</h1>
         <h1>Be yourself</h1>
-
-        {/* filter */}
-
-        {/* checkbox */}
-        <CheckBox
-          list={kinds}
-          handleFilters={(filters) => handleFilters(filters, "kinds")}
-        />
-        {/* radio box */}
-
         {/* search */}
+        <div style={{ margin: "1rem auto" }}>
+          <SearchFeature refreshFunction={updateSearchTerm} />
+        </div>
+        {/* filter */}
+        {/* checkbox */}
+        <Row gutter={[16, 16]}>
+          <Col lg={12} xs={24}>
+            <CheckBox
+              list={kinds}
+              handleFilters={(filters) => handleFilters(filters, "kinds")}
+            />
+            {/* radio box */}
+          </Col>
+          <Col lg={12} xs={24}>
+            <RadioBox
+              list={price}
+              handleFilters={(filters) => handleFilters(filters, "price")}
+            />
+          </Col>
+        </Row>
 
         {/* card */}
         <Row gutter={(16, 16)}> {renderCard}</Row>

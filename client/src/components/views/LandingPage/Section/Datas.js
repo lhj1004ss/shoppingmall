@@ -8,4 +8,13 @@ const kinds = [
   { _id: 7, name: "Underwear" },
 ];
 
-export { kinds };
+const price = [
+  { _id: 0, name: "All Products", array: [] },
+  { _id: 1, name: "$0 to $49", array: [0, 50] },
+  { _id: 2, name: "$50 to $99", array: [50, 99] },
+  { _id: 3, name: "$100 to $149", array: [100, 149] },
+  { _id: 4, name: "$150 to $249", array: [150, 249] },
+  { _id: 5, name: "More than $250", array: [250, 20000] },
+];
+
+export { kinds, price };
