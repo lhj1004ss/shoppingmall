@@ -19,7 +19,7 @@ const kinds = [
 
 function UploadProductPage(props) {
   const [Name, setName] = useState("");
-  const [Description, setDescription] = useState(0);
+  const [Description, setDescription] = useState("");
   const [Price, setPrice] = useState(0);
   const [Kind, setKind] = useState(1);
 
@@ -55,7 +55,7 @@ function UploadProductPage(props) {
       //current login user ID
       writer: props.user.userData._id,
       title: Name,
-      descrption: Description,
+      description: Description,
       price: Price,
       images: Images,
       kinds: Kind,

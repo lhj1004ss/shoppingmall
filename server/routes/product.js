@@ -89,4 +89,29 @@ router.post("/products", (req, res) => {
   }
 });
 
+router.get("/products_by_id", (req, res) => {
+  // get product that is same as productId from DB
+
+  //  type is array for cart page
+  let type = req.query.type;
+  let productIds = req.query.id;
+
+  if (type === "array") {
+    // split mant ids into each one
+    // ex) id=123123,123131234,1312313 into productIds= ['1234','123134','1231234']
+    let ids = req.query.id.split(",");
+    productIds = [];
+    productIds = ids.map((item) => {
+      return item;
+    });
+  }
+
+  Product.find({ _id: { $in: productIds } })
+    .populate("writer")
+    .exec((err, product) => {
+      if (err) return res.status(400).send(err);
+      return res.status(200).json({ success: true, product });
+    });
+});
+
 module.exports = router;

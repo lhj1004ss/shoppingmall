@@ -16,6 +16,8 @@ router.get("/auth", auth, (req, res) => {
     lastname: req.user.lastname,
     role: req.user.role,
     image: req.user.image,
+    cart: req.user.cart,
+    history: req.user.history,
   });
 });
 
@@ -65,6 +67,61 @@ router.get("/logout", auth, (req, res) => {
       });
     }
   );
+});
+
+router.post("/addToCart", auth, (req, res) => {
+  //  get user info from auth(req.user)
+  let duplicate = false;
+
+  User.findOne({ _id: req.user._id }, (err, userInfo) => {
+    //  false means no same item in cart
+    //  true mean same item in cart
+    // check if there is a product in cart
+    userInfo.cart.forEach((item) => {
+      if (item._id === req.body.productId) {
+        duplicate = true;
+      }
+    });
+
+    if (duplicate) {
+      // if already a product in cart
+      User.findOneAndUpdate(
+        {
+          _id: req.user._id,
+          "cart.id": req.body.productId,
+        },
+        // whenever clicked, add one quantitiy of the item
+        { $inc: { "cart.$.quantity": 1 } },
+        // to get new updated info
+        { new: true },
+        (err, userInfo) => {
+          if (err) return res.status(400).json({ success: false, err });
+          return res.status(200).json(userInfo.cart);
+          //  send
+        }
+      );
+    } else {
+      // if no product in cart, then add product, date, product info
+      User.findOneAndUpdate(
+        { _id: req.user._id },
+        {
+          $push: {
+            cart: {
+              id: req.body.productId,
+              quantity: 1,
+              date: Date.now(),
+            },
+          },
+        },
+        { new: true },
+        (err, userInfo) => {
+          if (err) return res.status(400).json({ success: false, err });
+          return res.status(200).json(userInfo.cart);
+          // send
+        }
+      );
+    }
+  });
 });
 
 module.exports = router;
