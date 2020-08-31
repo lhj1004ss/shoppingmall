@@ -6,6 +6,7 @@ import {
   LOGOUT_USER,
   ADD_TO_CART,
   GET_CART_ITEMS,
+  REMOVE_CART_ITEM,
 } from "./types";
 import { USER_SERVER } from "../components/Config.js";
 
@@ -74,9 +75,9 @@ export function getCartItems(cartItems, userCart) {
       //to add quantity data to Product Information that come from Product Collection.
 
       userCart.forEach((cartItem) => {
-        response.data.product.forEach((productDetail, i) => {
+        response.data.forEach((productDetail, i) => {
           if (cartItem.id === productDetail._id) {
-            response.data.product[i].quantity = cartItem.quantity;
+            response.data[i].quantity = cartItem.quantity;
           }
         });
       });
@@ -89,3 +90,25 @@ export function getCartItems(cartItems, userCart) {
     payload: request,
   };
 }
+
+export function removeCartItem(productId) {
+  const request = axios
+    .get(`/api/users/removeFromCart?id=${productId}`)
+    .then((response) => {
+      // make cartdetail  by using productInfo and cart
+      response.data.cart.forEach((item) => {
+        response.data.productInfo.forEach((product, index) => {
+          if (item.id === product._id) {
+            response.data.productInfo[index].quantity = item.quantity;
+          }
+        });
+      });
+      return response.data;
+    });
+
+  return {
+    type: REMOVE_CART_ITEM,
+    payload: request,
+  };
+}
+// make cartdetail  by using productInfo and cart

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../models/User");
-
 const { auth } = require("../middleware/auth");
+const { Product } = require("../models/Product");
 
 //user
 
@@ -97,7 +97,6 @@ router.post("/addToCart", auth, (req, res) => {
         (err, userInfo) => {
           if (err) return res.status(400).json({ success: false, err });
           return res.status(200).json(userInfo.cart);
-          //  send
         }
       );
     } else {
@@ -117,11 +116,32 @@ router.post("/addToCart", auth, (req, res) => {
         (err, userInfo) => {
           if (err) return res.status(400).json({ success: false, err });
           return res.status(200).json(userInfo.cart);
-          // send
         }
       );
     }
   });
 });
 
+router.get("/removeFromCart", auth, (req, res) => {
+  // remove the item clicked by user
+  User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $pull: { cart: { id: req.query.id } } },
+    { new: true },
+    (err, userInfo) => {
+      let cart = userInfo.cart;
+      let array = cart.map((item) => {
+        return item.id;
+      });
+
+      Product.find({ _id: { $in: array } })
+        .populate("writer")
+        .exec((err, productInfo) => {
+          return res.status(200).json({ productInfo, cart });
+        });
+    }
+  );
+
+  // get leftover cartdetail from product collection
+});
 module.exports = router;
