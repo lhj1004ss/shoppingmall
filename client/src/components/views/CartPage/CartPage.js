@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getCartItems, removeCartItem } from "../../../_actions/user_actions";
+import {
+  getCartItems,
+  onSuccessBuy,
+  removeCartItem,
+} from "../../../_actions/user_actions";
 import UserCardBlock from "./UserCardBlock";
-import { Empty, Button } from "antd";
+import { Empty, Button, Result } from "antd";
 import Paypal from "../../utils/Paypal";
+import { set } from "mongoose";
 
 function CartPage(props) {
   const dispatch = useDispatch();
   const [Total, setTotal] = useState(0);
   const [ShowTotal, setShowTotal] = useState(false);
+  const [ShowSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     let cartItems = [];
@@ -50,6 +56,20 @@ function CartPage(props) {
     });
   };
 
+  const transactionSuccess = (data) => {
+    dispatch(
+      onSuccessBuy({
+        paymentData: data,
+        cartDetail: props.user.cartDetail,
+      })
+    ).then((response) => {
+      if (response.payload.success) {
+        setShowTotal(false);
+        setShowSuccess(true);
+      }
+    });
+  };
+
   return (
     <div
       style={{
@@ -66,6 +86,7 @@ function CartPage(props) {
           removeItem={removeHandler}
         />
       </div>
+
       {ShowTotal ? (
         <div
           style={{
@@ -76,6 +97,18 @@ function CartPage(props) {
         >
           <h2> Total Amount:$ {Total}</h2>
         </div>
+      ) : ShowSuccess ? (
+        <Result
+          status="success"
+          title="Successfully Purchased"
+          extra={[
+            <a href="/">
+              <Button type="danger" size="large" key="home">
+                Go Home
+              </Button>
+            </a>,
+          ]}
+        />
       ) : (
         <div>
           <Empty />
@@ -97,9 +130,11 @@ function CartPage(props) {
           </a>
         </div>
       )}
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Paypal />
-      </div>
+      {ShowTotal && (
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Paypal total={Total} onSuccess={transactionSuccess} />
+        </div>
+      )}
     </div>
   );
 }

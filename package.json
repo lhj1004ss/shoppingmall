@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "antd": "^4.6.1",
+    "async": "^3.2.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
@@ -32,6 +33,7 @@
     "supports-color": "^7.1.0"
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.2.2",
     "concurrently": "^4.1.0",
     "nodemon": "^1.19.1"
   }
