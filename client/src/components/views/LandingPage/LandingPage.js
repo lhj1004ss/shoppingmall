@@ -7,7 +7,6 @@ import CheckBox from "./Section/CheckBox";
 import { kinds, price } from "./Section/Datas";
 import RadioBox from "./Section/RadioBox";
 import SearchFeature from "./Section/SearchFeature";
-import { set } from "mongoose";
 
 function LandingPage() {
   const [Products, setProducts] = useState([]);

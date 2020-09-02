@@ -1,0 +1,8 @@
+.homePage {
+  padding-top: 0;
+  margin-top: 0;
+  background: url("../../../images/mainbackground.jpg") center/cover no-repeat
+    fixed;
+  height: 100vh;
+  position: relative;
+}

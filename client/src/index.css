@@ -45,3 +45,20 @@ input.error {
   max-height: 500px;
   height: 500px;
 }
+/* service */
+.service {
+  color: darkgreen;
+}
+.ant-row {
+  background: lightgray;
+}
+.ant-col {
+  height: 250px;
+}
+.ant-col:hover {
+  background: white;
+}
+
+/* about */
+
+/* footer */

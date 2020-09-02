@@ -1,24 +1,47 @@
-import React, { useState } from 'react';
-import LeftMenu from './Sections/LeftMenu';
-import RightMenu from './Sections/RightMenu';
-import { Drawer, Button, Icon } from 'antd';
-import './Sections/Navbar.css';
+import React, { useState, useEffect } from "react";
+import LeftMenu from "./Sections/LeftMenu";
+import RightMenu from "./Sections/RightMenu";
+import { Drawer, Button, Icon } from "antd";
+import "./Sections/Navbar.css";
+import logo from "../../../images/logo.jpeg";
+import axios from "axios";
+import SearchFeature from "../LandingPage/Section/SearchFeature";
 
-function NavBar() {
-  const [visible, setVisible] = useState(false)
+function NavBar(props) {
+  const [visible, setVisible] = useState(false);
 
   const showDrawer = () => {
-    setVisible(true)
+    setVisible(true);
   };
 
   const onClose = () => {
-    setVisible(false)
+    setVisible(false);
   };
 
   return (
-    <nav className="menu" style={{ position: 'fixed', zIndex: 5, width: '100%' }}>
+    <nav
+      className="menu"
+      style={{
+        position: "fixed",
+        zIndex: 5,
+        width: "100%",
+      }}
+    >
       <div className="menu__logo">
-        <a href="/">Logo</a>
+        <a href="/">
+          <img
+            style={{
+              // maxWidth: "3rem",
+              // maxHeight: "3rem",
+              height: "auto",
+              width: "30%",
+              background: "white",
+            }}
+            className="logo"
+            src={logo}
+            alt="logo"
+          />
+        </a>
       </div>
       <div className="menu__container">
         <div className="menu_left">
@@ -42,12 +65,12 @@ function NavBar() {
           onClose={onClose}
           visible={visible}
         >
-          <LeftMenu mode="inline" />
+          <LeftMenu mode="inline"></LeftMenu>
           <RightMenu mode="inline" />
         </Drawer>
       </div>
     </nav>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

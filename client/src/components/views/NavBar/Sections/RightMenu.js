@@ -22,6 +22,9 @@ function RightMenu(props) {
   if (user.userData && !user.userData.isAuth) {
     return (
       <Menu mode={props.mode}>
+        <Menu.Item key="buy-sell">
+          <a href="/landingpage">Buy & Sell</a>
+        </Menu.Item>
         <Menu.Item key="mail">
           <a href="/login">Signin</a>
         </Menu.Item>
@@ -34,7 +37,9 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="cart">
-          <Badge count={5}>
+          <Badge
+          // count={5}
+          >
             <a
               href="/user/cart"
               style={{ marginRight: -25 }}
@@ -43,6 +48,9 @@ function RightMenu(props) {
               <Icon type="shopping-cart" style={{ fontSize: "2rem" }} />
             </a>
           </Badge>
+        </Menu.Item>
+        <Menu.Item key="buy-sell">
+          <a href="/landingpage">Buy & Sell</a>
         </Menu.Item>
         <Menu.Item key="upload">
           <a href="/product/upload">Upload</a>
