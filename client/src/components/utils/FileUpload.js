@@ -41,15 +41,16 @@ function FileUpload(props) {
         {({ getRootProps, getInputProps }) => (
           <section>
             <div
-              className="hello"
+              className="file"
               style={{
                 width: "300px",
                 height: "240px",
-                border: "2px solid black",
+                border: "2px solid darkgreen",
+
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                borderRadius: "2rem",
+                borderRadius: "45%",
               }}
               {...getRootProps()}
             >
@@ -77,13 +78,12 @@ function FileUpload(props) {
             key={index}
           >
             <img
-              className="hello"
               style={{
                 minWidth: "300px",
                 width: "300px",
                 height: "250px",
-                border: "2px solid black",
-                borderRadius: "2rem",
+                border: "2px solid darkgreen",
+                borderRadius: "45%",
               }}
               src={`http://localhost:5000/${image}`}
             />

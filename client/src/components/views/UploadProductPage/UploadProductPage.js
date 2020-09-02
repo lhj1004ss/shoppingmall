@@ -64,8 +64,8 @@ function UploadProductPage(props) {
     Axios.post("/api/product", variables).then((response) => {
       if (response.data.success) {
         alert("succeeded to upload clothing");
-        // go to main homepage
-        props.history.push("/");
+        // go to shop
+        props.history.push("/landingpage");
       } else {
         alert("failed to upload clothing");
       }
@@ -75,29 +75,43 @@ function UploadProductPage(props) {
   return (
     <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <Title level={1}> Clothes Product Upload</Title>
+        <Title level={1}> Used Products Upload</Title>
       </div>
       <Form onSubmit={onSubmit}>
         {/* clothing upload*/}
         <FileUpload refreshFunction={updateImages} />
         <br />
         <br />
-        <label>Product Name</label>
-        <Input onChange={nameChangeHandler} value={Name} />
+        <label style={{ color: "black" }}>Product Name</label>
+        <Input
+          style={{ color: "black", border: "2px solid darkgreen" }}
+          onChange={nameChangeHandler}
+          value={Name}
+        />
         <br />
         <br />
-        <label>Description</label>
+        <label style={{ color: "black" }}>Description</label>
         <TextArea
+          style={{ color: "black", border: "2px solid darkgreen" }}
           onChange={descriptionChangeHandler}
           value={Description}
         ></TextArea>
         <br />
         <br />
-        <label>Price</label>
-        <Input type="number" onChange={priceChangeHandler} value={Price} />
+        <label style={{ color: "black" }}>Price</label>
+        <Input
+          style={{ color: "black", border: "2px solid darkgreen" }}
+          type="number"
+          onChange={priceChangeHandler}
+          value={Price}
+        />
         <br />
         <br />
-        <select onChange={kindChangeHandler} value={Kind}>
+        <select
+          style={{ color: "darkgreen" }}
+          onChange={kindChangeHandler}
+          value={Kind}
+        >
           {kinds.map((item) => (
             <option key={item.key} value={item.key}>
               {item.value}
@@ -107,7 +121,15 @@ function UploadProductPage(props) {
         <br />
         <br />
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Button type="submit" onClick={onSubmit}>
+          <Button
+            style={{
+              color: "white",
+              background: "darkgreen",
+              fontWeight: "bold",
+            }}
+            type="submit"
+            onClick={onSubmit}
+          >
             Upload
           </Button>
         </div>

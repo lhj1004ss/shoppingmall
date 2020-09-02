@@ -14,7 +14,7 @@ function CartPage(props) {
   const dispatch = useDispatch();
   const [Total, setTotal] = useState(0);
   const [ShowTotal, setShowTotal] = useState(false);
-  const [ShowSuccess, setShowSuccess] = useState(false);
+  // const [ShowSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     let cartItems = [];
@@ -56,19 +56,19 @@ function CartPage(props) {
     });
   };
 
-  const transactionSuccess = (data) => {
-    dispatch(
-      onSuccessBuy({
-        paymentData: data,
-        cartDetail: props.user.cartDetail,
-      })
-    ).then((response) => {
-      if (response.payload.success) {
-        setShowTotal(false);
-        setShowSuccess(true);
-      }
-    });
-  };
+  // const transactionSuccess = (data) => {
+  //   dispatch(
+  //     onSuccessBuy({
+  //       paymentData: data,
+  //       cartDetail: props.user.cartDetail,
+  //     })
+  //   ).then((response) => {
+  //     if (response.payload.success) {
+  //       setShowTotal(false);
+  //       setShowSuccess(true);
+  //     }
+  //   });
+  // };
 
   return (
     <div
@@ -77,9 +77,11 @@ function CartPage(props) {
         margin: "3rem auto",
         alignItems: "center",
         justifyContent: "center",
+        color: "green",
+        fontWeight: "bold",
       }}
     >
-      <h1 style={{ textAlign: "center" }}>My Cart</h1>
+      <h1 style={{ textAlign: "center", color: "green" }}>My Cart</h1>
       <div style={{ marginBottom: "1rem" }}>
         <UserCardBlock
           products={props.user.cartDetail}
@@ -95,33 +97,22 @@ function CartPage(props) {
             justifyContent: "flex-end",
           }}
         >
-          <h2> Total Amount:$ {Total}</h2>
+          <h2 style={{ color: "green" }}> Total Amount:$ {Total}</h2>
         </div>
-      ) : ShowSuccess ? (
-        <Result
-          status="success"
-          title="Successfully Purchased"
-          extra={[
-            <a href="/">
-              <Button type="danger" size="large" key="home">
-                Go Home
-              </Button>
-            </a>,
-          ]}
-        />
       ) : (
         <div>
           <Empty />
-
-          <a href="/">
+          <a href="/landingpage">
             <Button
               size="large"
               shape="round"
-              type="danger"
               style={{
                 margin: "1rem auto",
                 display: "flex",
                 justifyContent: "center",
+                background: "green",
+                fontWeight: "bold",
+                alignItems: "center",
                 alignItems: "center",
               }}
             >
@@ -130,13 +121,16 @@ function CartPage(props) {
           </a>
         </div>
       )}
-      {ShowTotal && (
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <Paypal total={Total} onSuccess={transactionSuccess} />
-        </div>
-      )}
     </div>
   );
 }
 
 export default CartPage;
+
+{
+  /* {ShowTotal && (
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Paypal total={Total} onSuccess={transactionSuccess} />
+        </div>
+      )} */
+}

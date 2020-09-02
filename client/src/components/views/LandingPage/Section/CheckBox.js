@@ -34,14 +34,14 @@ function CheckBox(props) {
           onChange={() => handleCheckBox(value._id)}
           checked={Checked.indexOf(value._id) === -1 ? false : true}
         />
-        <span>{value.name}</span>
+        <span style={{ marginRight: "1rem" }}>{value.name}</span>
       </React.Fragment>
     ));
 
   return (
     <div>
-      <Collapse defaultActiveKey={[""]}>
-        <Panel header="Types" key="1">
+      <Collapse style={{ color: "white" }} defaultActiveKey={[""]}>
+        <Panel style={{ background: "green" }} header="Types" key="1">
           {renderCheckBoxList()}
         </Panel>
       </Collapse>

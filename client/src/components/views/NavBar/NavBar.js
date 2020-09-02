@@ -31,11 +31,8 @@ function NavBar(props) {
         <a href="/">
           <img
             style={{
-              // maxWidth: "3rem",
-              // maxHeight: "3rem",
               height: "auto",
               width: "30%",
-              background: "white",
             }}
             className="logo"
             src={logo}
@@ -58,14 +55,13 @@ function NavBar(props) {
           <Icon type="align-right" />
         </Button>
         <Drawer
-          title="Basic Drawer"
+          title="Welcome to Used Closthes"
           placement="right"
           className="menu_drawer"
           closable={false}
           onClose={onClose}
           visible={visible}
         >
-          <LeftMenu mode="inline"></LeftMenu>
           <RightMenu mode="inline" />
         </Drawer>
       </div>

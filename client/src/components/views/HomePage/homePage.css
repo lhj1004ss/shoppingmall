@@ -3,6 +3,37 @@
   margin-top: 0;
   background: url("../../../images/mainbackground.jpg") center/cover no-repeat
     fixed;
-  height: 100vh;
+  height: 91vh;
   position: relative;
 }
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.font {
+  position: absolute;
+  font-size: 2rem;
+  color: white;
+  align-items: center;
+  z-index: 1;
+  cursor: pointer;
+  left: 49%;
+  top: 85%;
+  transform: translate(-50%, -50%);
+  animation: bounce 2s ease infinite;
+}
+
+/* @media screen and (max-width: 1170px) {
+  .font {
+    display: none;
+  }
+} */

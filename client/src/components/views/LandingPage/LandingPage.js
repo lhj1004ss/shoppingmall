@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Carousel, Icon, Col, Card, Row } from "antd";
+import { Carousel, Icon, Col, Card, Row, Button } from "antd";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../utils/ImageSlider";
 import CheckBox from "./Section/CheckBox";
@@ -27,6 +27,7 @@ function LandingPage() {
     return (
       <Col lg={6} md={8} xs={24} key={index}>
         <Card
+          style={{ marginBottom: "1rem" }}
           cover={
             <a href={`/product/${product._id}`}>
               <ImageSlider images={product.images} />
@@ -119,8 +120,8 @@ function LandingPage() {
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
-        <h1>Back to School Deal</h1>
-        <h1>Be yourself</h1>
+        <h1 style={{ color: "green" }}>Save your money</h1>
+        <h1 style={{ color: "green" }}> Spend Less , Get More</h1>
         {/* search */}
         <div style={{ margin: "1rem auto" }}>
           <SearchFeature refreshFunction={updateSearchTerm} />
@@ -148,8 +149,23 @@ function LandingPage() {
       </div>
 
       {PostSize >= Limit && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <button onClick={loadMoreHandler}>Load More</button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "2rem",
+          }}
+        >
+          <Button
+            style={{
+              color: "white",
+              background: "green",
+              fontWeight: "bold",
+            }}
+            onClick={loadMoreHandler}
+          >
+            More Products
+          </Button>
         </div>
       )}
     </div>

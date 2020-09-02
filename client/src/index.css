@@ -45,20 +45,9 @@ input.error {
   max-height: 500px;
   height: 500px;
 }
-/* service */
-.service {
-  color: darkgreen;
+.img {
+  width: 100%;
 }
-.ant-row {
-  background: lightgray;
+.ant-menu {
+  font-weight: bold;
 }
-.ant-col {
-  height: 250px;
-}
-.ant-col:hover {
-  background: white;
-}
-
-/* about */
-
-/* footer */

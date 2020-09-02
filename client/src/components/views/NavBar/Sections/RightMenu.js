@@ -21,17 +21,25 @@ function RightMenu(props) {
 
   if (user.userData && !user.userData.isAuth) {
     return (
-      <Menu mode={props.mode}>
-        <Menu.Item key="buy-sell">
-          <a href="/landingpage">Buy & Sell</a>
-        </Menu.Item>
-        <Menu.Item key="mail">
-          <a href="/login">Signin</a>
-        </Menu.Item>
-        <Menu.Item key="app">
-          <a href="/register">Signup</a>
-        </Menu.Item>
-      </Menu>
+      <div>
+        <Menu mode={props.mode}>
+          <Menu.Item key="buy-sell">
+            <a style={{ color: "darkgreen" }} href="/landingpage">
+              Buy & Sell
+            </a>
+          </Menu.Item>
+          <Menu.Item key="mail">
+            <a style={{ color: "darkgreen" }} href="/login">
+              Login
+            </a>
+          </Menu.Item>
+          <Menu.Item key="app">
+            <a style={{ color: "darkgreen" }} href="/register">
+              Register
+            </a>
+          </Menu.Item>
+        </Menu>
+      </div>
     );
   } else {
     return (
@@ -43,21 +51,27 @@ function RightMenu(props) {
             <a
               href="/user/cart"
               style={{ marginRight: -25 }}
-              className="head-example"
+              style={{ color: "green" }}
             >
               <Icon type="shopping-cart" style={{ fontSize: "2rem" }} />
             </a>
           </Badge>
         </Menu.Item>
         <Menu.Item key="buy-sell">
-          <a href="/landingpage">Buy & Sell</a>
+          <a style={{ color: "green" }} href="/landingpage">
+            Buy & Sell
+          </a>
         </Menu.Item>
         <Menu.Item key="upload">
-          <a href="/product/upload">Upload</a>
+          <a style={{ color: "green" }} href="/product/upload">
+            Upload
+          </a>
         </Menu.Item>
 
         <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Logout</a>
+          <a style={{ color: "green" }} onClick={logoutHandler}>
+            Logout
+          </a>
         </Menu.Item>
       </Menu>
     );

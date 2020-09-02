@@ -26,8 +26,7 @@ function ProductInfo(props) {
         </Descriptions.Item>
 
         <Descriptions.Item label="View">{props.detail.views}</Descriptions.Item>
-        {/* <Descriptions.Item label="Sold">{props.detail.sold}</Descriptions.Item>
-        <Descriptions.Item label="View">{props.detail.views}</Descriptions.Item> */}
+
         <Descriptions.Item label="Description">
           {props.detail.description}
         </Descriptions.Item>
@@ -39,15 +38,18 @@ function ProductInfo(props) {
 
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Button
-          style={{ marginRight: "1rem" }}
+          style={{ marginRight: "1rem", color: "white", background: "green" }}
           size="large"
           shape="round"
-          type="danger"
           onClick={clickHandler}
         >
           Add to Cart
         </Button>
-        <Button size="large" shape="round" type="danger">
+        <Button
+          size="large"
+          shape="round"
+          style={{ color: "white", background: "green" }}
+        >
           <a href="/user/cart"> View Cart</a>
         </Button>
       </div>

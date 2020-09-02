@@ -13,13 +13,13 @@ export default class ServicePage extends Component {
       {
         icon: <RiLuggageCartLine />,
         title: "Buy",
-        detail: "Easy to buy",
+        detail: "Spend Less, Get More",
       },
 
       {
         icon: <RiMoneyDollarCircleFill />,
         title: "Sell",
-        detail: "Easy to sell",
+        detail: "Easy to Sell",
       },
       {
         icon: <RiRecycleFill />,
@@ -36,38 +36,43 @@ export default class ServicePage extends Component {
 
   render() {
     return (
-      <div>
-        <Row>
+      <div
+        id="service"
+        style={{
+          height: "40vh",
+          margin: "0 auto",
+          justifyContent: "center",
+          alignItems: "center",
+          background: "lightgray",
+        }}
+      >
+        <Row style={{ background: "lightgray" }}>
           <h1 style={{ marginTop: "2rem", textAlign: "center" }}>Services</h1>
           <hr />
           {this.state.service.map((item, index) => {
             return (
-              <Col
-                lg={6}
-                md={12}
-                xs={24}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  textAlign: "center",
-                }}
-              >
-                <div className="service">
-                  <span style={{ fontSize: "2rem" }}>{item.icon}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.detail}</p>
-                </div>
-              </Col>
+              <div>
+                <Col
+                  lg={6}
+                  md={12}
+                  xs={24}
+                  style={{
+                    background: "",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                  }}
+                >
+                  <div style={{ color: "darkgreen" }}>
+                    <span style={{ fontSize: "2rem" }}>{item.icon}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.detail}</p>
+                  </div>
+                </Col>
+              </div>
             );
           })}
-          <br />
-          <br />
-          <p style={{ textAlign: "center" }}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-            eligendi ullam numquam ad assumenda neque aliquid laudantium commodi
-            tenetur perferendis.
-          </p>
         </Row>
       </div>
     );
