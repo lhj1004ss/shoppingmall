@@ -81,7 +81,16 @@ function LoginPage(props) {
           handleReset,
         } = props;
         return (
-          <div className="app">
+          <div
+            style={{
+              width: "40%",
+              margin: "0 auto",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "lightgray",
+            }}
+            className="app"
+          >
             <Title style={{ color: "green" }} level={2}>
               Log In
             </Title>

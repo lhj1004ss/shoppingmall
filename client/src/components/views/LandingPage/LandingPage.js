@@ -11,7 +11,7 @@ import SearchFeature from "./Section/SearchFeature";
 function LandingPage() {
   const [Products, setProducts] = useState([]);
   const [Skip, setSkip] = useState(0);
-  const [Limit, setLimit] = useState(8);
+  const [Limit, setLimit] = useState(9);
   const [PostSize, setPostSize] = useState(0);
   const [Filters, setFilters] = useState({ kinds: [], price: [] });
   const [SearchTerm, setSearchTerm] = useState("");
@@ -25,9 +25,13 @@ function LandingPage() {
     console.log(product);
 
     return (
-      <Col lg={6} md={8} xs={24} key={index}>
+      <Col lg={8} md={12} xs={24} key={index}>
         <Card
-          style={{ marginBottom: "1rem" }}
+          style={{
+            marginBottom: "1rem",
+            background: "lightgray",
+            color: "white",
+          }}
           cover={
             <a href={`/product/${product._id}`}>
               <ImageSlider images={product.images} />

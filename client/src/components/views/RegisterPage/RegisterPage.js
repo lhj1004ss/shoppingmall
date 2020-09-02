@@ -4,8 +4,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { registerUser } from "../../../_actions/user_actions";
 import { useDispatch } from "react-redux";
-
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Typography } from "antd";
+const { Title } = Typography;
 
 const formItemLayout = {
   labelCol: {
@@ -89,8 +89,19 @@ function RegisterPage(props) {
           handleReset,
         } = props;
         return (
-          <div className="app">
-            <h2 style={{ color: "green" }}>Registor Now</h2>
+          <div
+            style={{
+              width: "40%",
+              margin: "0 auto",
+              background: "lightgray",
+            }}
+            className="app"
+          >
+            {/* <h2 style={{ color: "green" }}>Registor Now</h2> */}
+
+            <Title style={{ color: "green" }} level={2}>
+              Register Now
+            </Title>
             <Form
               style={{ minWidth: "375px" }}
               {...formItemLayout}
